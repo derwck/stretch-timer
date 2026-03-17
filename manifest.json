@@ -1,0 +1,17 @@
+{
+  "name": "Stretch Timer",
+  "short_name": "Stretch",
+  "description": "A timer app for stretches and mobility exercises",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a1f2e",
+  "theme_color": "#1a1f2e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%231a1f2e'/><circle cx='96' cy='96' r='60' stroke='%23da7756' stroke-width='8' fill='none'/><text x='96' y='108' font-family='sans-serif' font-size='48' font-weight='500' fill='%23da7756' text-anchor='middle'>S</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
