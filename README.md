@@ -2,7 +2,7 @@
 
 A clean, minimal timer app for stretches and mobility routines — built as a Progressive Web App (PWA). Works offline, installable on your phone, no account needed.
 
-Built with a Claude-inspired dark theme.
+Built by Claude AI.
 
 ---
 
