@@ -127,7 +127,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:15px;}
 .timer-wrap{position:relative;width:190px;height:190px;margin-bottom:18px;}
 .timer-wrap svg{position:absolute;inset:0;transform:rotate(-90deg);}
 .ring-bg{stroke:var(--surface2);fill:none;stroke-width:5;}
-.ring-fg{fill:none;stroke-width:5;stroke-linecap:round;}
+.ring-fg{fill:none;stroke-width:5;stroke-linecap:butt;}
 .timer-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
 .tval{font-family:'DM Mono',monospace;font-size:48px;font-weight:400;line-height:1;letter-spacing:-0.02em;}
 .tlbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
@@ -728,14 +728,15 @@ function startTick(){
     $('ring-fg').style.strokeDashoffset=CIRC*(1-(v/max));
     if(v>0&&v<=3) beepTick();
     if(v<=0){
-      // fully empty
-      $('ring-fg').style.transition='none';
-      $('ring-fg').style.strokeDashoffset=CIRC;
-      void $('ring-fg').offsetWidth;
-      $('ring-fg').style.transition='stroke-dashoffset 1s linear, stroke .3s';
+      const arc=document.getElementById('ring-fg');
+      arc.style.transition='none';
+      arc.style.strokeDashoffset=CIRC;
+      arc.style.opacity='0';
+      void arc.offsetWidth;
+      arc.style.transition='stroke-dashoffset 1s linear, stroke .3s';
       clearInterval(sess.tInterval);
       beepDone();
-      setTimeout(advance, 350);
+      setTimeout(()=>{ arc.style.opacity='1'; advance(); }, 350);
     }
   },1000);
 }
