@@ -24,157 +24,149 @@
   --muted:#8b8fa8;
   --border:rgba(255,255,255,0.07);
   --danger:#e24b4a;
-  --success:#1d9e75;
   --r-md:10px;
   --r-lg:16px;
   --r-xl:22px;
 }
 html,body{height:100%;overflow:hidden;background:var(--bg);}
 body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:15px;}
-
-/* ── Layout ── */
 #app{height:100vh;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative;overflow:hidden;}
 .screen{display:none;flex-direction:column;height:100%;overflow:hidden;}
 .screen.active{display:flex;}
 
-/* ── Nav ── */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:0.5px solid var(--border);flex-shrink:0;}
-.nav-title{font-size:15px;font-weight:500;letter-spacing:0.01em;}
+.nav-title{font-size:15px;font-weight:500;}
 .nav-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:6px 10px;border-radius:var(--r-md);font-family:'DM Sans',sans-serif;transition:all .15s;}
-.nav-btn:hover,.nav-btn:active{color:var(--text);background:var(--surface2);}
+.nav-btn:hover{color:var(--text);background:var(--surface2);}
 .nav-btn.accent{color:var(--orange);}
 .nav-btn.accent:hover{background:var(--orange-dim);}
 
-/* ── Scrollable body ── */
 .scroll-body{flex:1;overflow-y:auto;padding:20px;-webkit-overflow-scrolling:touch;}
 .scroll-body::-webkit-scrollbar{display:none;}
-
-/* ── Section label ── */
 .sec-label{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;}
 
-/* ── HOME ── */
+/* HOME */
 .routine-card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;cursor:pointer;transition:background .15s;}
-.routine-card:hover,.routine-card:active{background:var(--surface2);}
+.routine-card:hover{background:var(--surface2);}
 .routine-card-info{flex:1;}
 .routine-card-name{font-size:15px;font-weight:500;margin-bottom:3px;}
 .routine-card-meta{font-size:12px;color:var(--muted);}
-.routine-card-actions{display:flex;gap:6px;align-items:center;}
+.routine-card-actions{display:flex;gap:6px;}
 .icon-btn{background:none;border:none;color:var(--muted);cursor:pointer;font-size:15px;padding:6px;border-radius:8px;line-height:1;transition:all .15s;}
 .icon-btn:hover{color:var(--text);background:var(--surface3);}
 .icon-btn.del:hover{color:var(--danger);}
 .empty-state{text-align:center;padding:48px 24px;color:var(--muted);}
-.empty-state-icon{font-size:36px;margin-bottom:12px;opacity:.4;}
-.empty-state-text{font-size:14px;line-height:1.6;}
-.home-footer{padding:16px 20px;flex-shrink:0;}
-.primary-btn{width:100%;background:var(--orange);color:white;border:none;border-radius:var(--r-lg);padding:14px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.01em;transition:opacity .15s;}
-.primary-btn:hover,.primary-btn:active{opacity:.88;}
-.primary-btn:disabled{opacity:.35;cursor:not-allowed;}
+.empty-icon{font-size:36px;margin-bottom:12px;opacity:.4;}
+.primary-btn{width:100%;background:var(--orange);color:white;border:none;border-radius:var(--r-lg);padding:14px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s;}
+.primary-btn:hover{opacity:.88;}
 .secondary-btn{width:100%;background:none;border:0.5px solid var(--border);color:var(--text);border-radius:var(--r-lg);padding:13px;font-size:14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;margin-top:10px;}
 .secondary-btn:hover{background:var(--surface2);}
 
-/* ── EDITOR ── */
-.routine-name-input{width:100%;background:var(--surface);border:0.5px solid var(--border);color:var(--text);border-radius:var(--r-md);padding:10px 14px;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:20px;transition:border-color .2s;}
-.routine-name-input:focus{border-color:var(--orange);}
-.routine-name-input::placeholder{color:var(--muted);}
-.ex-item{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:13px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;}
-.ex-drag{color:var(--muted);font-size:16px;cursor:grab;flex-shrink:0;opacity:.5;}
+/* EDITOR */
+.rname-input{width:100%;background:var(--surface);border:0.5px solid var(--border);color:var(--text);border-radius:var(--r-md);padding:10px 14px;font-size:15px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:20px;transition:border-color .2s;}
+.rname-input:focus{border-color:var(--orange);}
+.rname-input::placeholder{color:var(--muted);}
+
+/* Drag list */
+.ex-item{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:13px 14px;margin-bottom:8px;display:flex;align-items:center;gap:10px;user-select:none;transition:opacity .15s,border-color .15s;}
+.ex-item.dragging{opacity:.45;}
+.ex-item.drag-over{border-color:var(--orange);}
+.ex-drag{color:var(--muted);font-size:18px;cursor:grab;flex-shrink:0;touch-action:none;padding:4px 2px;line-height:1;}
 .ex-info{flex:1;min-width:0;}
-.ex-name{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ex-name{font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .ex-detail{font-size:12px;color:var(--muted);margin-top:2px;}
 .add-btn{width:100%;background:none;border:1px dashed var(--border);border-radius:var(--r-lg);padding:13px;color:var(--muted);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;transition:all .15s;margin-top:4px;}
 .add-btn:hover{border-color:var(--orange);color:var(--orange);}
 
-/* ── FORM SHEET ── */
+/* SHEET */
 .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:50;transition:background .25s;pointer-events:none;}
 .sheet-backdrop.open{background:rgba(0,0,0,.55);pointer-events:all;}
-.sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:480px;background:var(--surface);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:20px 20px 32px;z-index:51;transition:transform .3s cubic-bezier(.32,.72,0,1);}
+.sheet{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:480px;background:var(--surface);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:20px 20px 36px;z-index:51;transition:transform .3s cubic-bezier(.32,.72,0,1);max-height:92vh;overflow-y:auto;}
 .sheet.open{transform:translateX(-50%) translateY(0);}
 .sheet-handle{width:36px;height:4px;background:var(--surface3);border-radius:2px;margin:0 auto 18px;}
 .sheet-title{font-size:16px;font-weight:500;margin-bottom:18px;}
 .field{margin-bottom:14px;}
-.field-label{font-size:12px;color:var(--muted);margin-bottom:5px;display:block;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;}
-.field-input{width:100%;background:var(--bg);border:0.5px solid var(--border);color:var(--text);border-radius:var(--r-md);padding:9px 12px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;appearance:none;}
-.field-input:focus{border-color:var(--orange);}
-.field-input::placeholder{color:var(--muted);}
+.flabel{font-size:11px;color:var(--muted);margin-bottom:5px;display:block;font-weight:500;text-transform:uppercase;letter-spacing:0.07em;}
+.finput{width:100%;background:var(--bg);border:0.5px solid var(--border);color:var(--text);border-radius:var(--r-md);padding:9px 12px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none;}
+.finput:focus{border-color:var(--orange);}
+.finput::placeholder{color:var(--muted);}
 .fields-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid var(--border);}
-.toggle-label{font-size:14px;}
-.toggle-sub{font-size:11px;color:var(--muted);margin-top:1px;}
-.toggle-wrap{display:flex;flex-direction:column;}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:0.5px solid var(--border);}
+.tlabel{font-size:14px;}
+.tsub{font-size:11px;color:var(--muted);margin-top:2px;}
+.twrap{display:flex;flex-direction:column;}
 .toggle{width:40px;height:22px;background:var(--surface3);border-radius:11px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;}
 .toggle.on{background:var(--orange);}
 .toggle::after{content:'';position:absolute;width:16px;height:16px;background:white;border-radius:50%;top:3px;left:3px;transition:left .2s;}
 .toggle.on::after{left:21px;}
 .sheet-actions{display:flex;gap:10px;margin-top:18px;}
-.btn-cancel{flex:1;background:none;border:0.5px solid var(--border);color:var(--muted);border-radius:var(--r-md);padding:11px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.btn-cancel{flex:1;background:none;border:0.5px solid var(--border);color:var(--muted);border-radius:var(--r-md);padding:11px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-cancel:hover{background:var(--surface2);}
 .btn-confirm{flex:2;background:var(--orange);border:none;color:white;border-radius:var(--r-md);padding:11px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;}
 .btn-confirm:hover{opacity:.88;}
 
-/* ── ACTIVE SESSION ── */
-.session-header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
-.session-routine-name{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
-.progress-track{height:2px;background:var(--surface2);margin:0 20px 0;flex-shrink:0;}
-.progress-fill{height:100%;background:var(--orange);border-radius:2px;transition:width .5s ease;}
-.session-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 24px;gap:0;}
-.phase-badge{font-size:11px;font-weight:500;padding:5px 16px;border-radius:20px;background:var(--orange-dim);color:var(--orange);border:0.5px solid var(--orange-border);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;min-height:26px;display:flex;align-items:center;}
-.ex-title{font-size:26px;font-weight:500;text-align:center;line-height:1.2;margin-bottom:4px;}
-.ex-subtitle{font-size:13px;color:var(--muted);margin-bottom:28px;text-align:center;}
+/* ACTIVE SESSION */
+.sess-header{padding:14px 20px 10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.sess-rname{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+.prog-track{height:2px;background:var(--surface2);margin:0 20px;flex-shrink:0;}
+.prog-fill{height:100%;background:var(--orange);border-radius:2px;transition:width .5s;}
+.sess-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px;position:relative;}
 
-.timer-wrap{position:relative;width:190px;height:190px;margin-bottom:20px;}
+/* Countdown overlay */
+.cd-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;pointer-events:none;background:var(--bg);}
+.cd-num{font-family:'DM Mono',monospace;font-size:88px;font-weight:400;color:var(--orange);opacity:0;transform:scale(1.4);transition:opacity .12s ease,transform .12s ease;}
+.cd-num.show{opacity:1;transform:scale(1);}
+.cd-go{font-size:32px;font-weight:500;color:var(--orange);opacity:0;transform:scale(0.7);transition:opacity .18s ease,transform .18s ease;letter-spacing:0.1em;}
+.cd-go.show{opacity:1;transform:scale(1);}
+.cd-exname{font-size:15px;color:var(--muted);margin-top:16px;}
+
+.phase-badge{font-size:11px;font-weight:500;padding:5px 16px;border-radius:20px;background:var(--orange-dim);color:var(--orange);border:0.5px solid var(--orange-border);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;}
+.ex-title{font-size:26px;font-weight:500;text-align:center;line-height:1.2;margin-bottom:4px;}
+.ex-sub{font-size:13px;color:var(--muted);margin-bottom:24px;text-align:center;min-height:18px;}
+
+.timer-wrap{position:relative;width:190px;height:190px;margin-bottom:18px;}
 .timer-wrap svg{position:absolute;inset:0;transform:rotate(-90deg);}
 .ring-bg{stroke:var(--surface2);fill:none;stroke-width:5;}
-.ring-fg{fill:none;stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset .9s linear,stroke .3s;}
+.ring-fg{fill:none;stroke-width:5;stroke-linecap:round;}
 .timer-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
-.timer-val{font-family:'DM Mono',monospace;font-size:48px;font-weight:400;line-height:1;letter-spacing:-0.02em;}
-.timer-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
+.tval{font-family:'DM Mono',monospace;font-size:48px;font-weight:400;line-height:1;letter-spacing:-0.02em;}
+.tlbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
 
-.rep-counter{font-size:28px;font-weight:500;margin-bottom:4px;}
-.rep-lbl{font-size:13px;color:var(--muted);margin-bottom:20px;}
-.tap-next{background:var(--orange);color:white;border:none;border-radius:var(--r-lg);padding:14px 36px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.01em;transition:opacity .15s;margin-bottom:8px;}
-.tap-next:active{opacity:.75;}
-
-.dots-row{display:flex;gap:8px;margin-bottom:24px;}
+.dots-row{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;justify-content:center;min-height:9px;}
 .dot{width:9px;height:9px;border-radius:50%;background:var(--surface2);border:0.5px solid var(--surface3);transition:all .25s;}
 .dot.done{background:var(--orange);border-color:var(--orange);}
 .dot.cur{background:none;border:2px solid var(--orange);}
 
 .controls{display:flex;align-items:center;gap:14px;}
 .ctrl{background:var(--surface);border:0.5px solid var(--border);color:var(--text);border-radius:50%;width:50px;height:50px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0;}
-.ctrl:hover,.ctrl:active{background:var(--surface2);}
+.ctrl:hover{background:var(--surface2);}
 .ctrl.main{width:66px;height:66px;background:var(--orange);border-color:transparent;font-size:22px;}
-.ctrl.main:hover,.ctrl.main:active{opacity:.88;background:var(--orange);}
-.next-hint{font-size:12px;color:var(--muted);margin-top:22px;text-align:center;min-height:18px;}
-.next-hint b{color:var(--text);font-weight:400;}
+.ctrl.main:hover{opacity:.88;background:var(--orange);}
 
-.session-footer{padding:14px 20px;flex-shrink:0;border-top:0.5px solid var(--border);}
+.rep-block{display:none;text-align:center;flex-direction:column;align-items:center;}
+.rep-big{font-size:28px;font-weight:500;margin-bottom:4px;}
+.rep-of{font-size:13px;color:var(--muted);margin-bottom:18px;}
+.tap-btn{background:var(--orange);color:white;border:none;border-radius:var(--r-lg);padding:14px 36px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s;margin-bottom:16px;}
+.tap-btn:active{opacity:.72;}
+
+.next-hint{font-size:12px;color:var(--muted);margin-top:20px;text-align:center;min-height:18px;}
+.next-hint b{color:var(--text);font-weight:400;}
+.sess-footer{padding:14px 20px;flex-shrink:0;border-top:0.5px solid var(--border);}
 .stop-btn{width:100%;background:none;border:0.5px solid rgba(226,75,74,.25);color:var(--danger);border-radius:var(--r-md);padding:11px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .stop-btn:hover{background:rgba(226,75,74,.08);}
 
-/* Rest screen */
-.rest-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
-.rest-label{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;}
-.rest-timer{font-family:'DM Mono',monospace;font-size:80px;font-weight:400;color:var(--orange);line-height:1;}
-.rest-next{font-size:14px;color:var(--muted);margin-top:16px;text-align:center;}
-.rest-next b{color:var(--text);font-weight:400;}
-.skip-rest{background:none;border:0.5px solid var(--border);color:var(--muted);border-radius:var(--r-md);padding:9px 20px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:32px;transition:all .15s;}
-.skip-rest:hover{background:var(--surface2);}
-
-/* ── DONE ── */
+/* DONE */
 .done-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;}
 .done-icon{width:68px;height:68px;background:var(--orange-dim);border:0.5px solid var(--orange-border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:20px;}
 .done-title{font-size:24px;font-weight:500;margin-bottom:6px;}
 .done-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;margin-bottom:36px;}
 .stat-card{background:var(--surface);border-radius:var(--r-md);padding:14px 8px;}
-.stat-n{font-family:'DM Mono',monospace;font-size:22px;font-weight:400;color:var(--orange);}
+.stat-n{font-family:'DM Mono',monospace;font-size:22px;color:var(--orange);}
 .stat-l{font-size:11px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:0.06em;}
 
-/* ── Toast ── */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface2);color:var(--text);padding:10px 20px;border-radius:var(--r-lg);font-size:13px;opacity:0;transition:all .3s;pointer-events:none;z-index:100;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-/* ── Confirm dialog ── */
 .dialog-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:60;display:none;align-items:center;justify-content:center;padding:24px;}
 .dialog-backdrop.open{display:flex;}
 .dialog{background:var(--surface);border-radius:var(--r-xl);padding:24px;width:100%;max-width:320px;}
@@ -194,7 +186,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:15px;}
       <div class="nav-title">Stretch Timer</div>
       <button class="nav-btn accent" onclick="newRoutine()">+ New</button>
     </div>
-    <div class="scroll-body" id="routine-list-wrap">
+    <div class="scroll-body">
       <div class="sec-label">My routines</div>
       <div id="routine-list"></div>
     </div>
@@ -208,7 +200,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:15px;}
       <button class="nav-btn accent" onclick="saveRoutine()">Save</button>
     </div>
     <div class="scroll-body">
-      <input class="routine-name-input" id="routine-name-input" placeholder="Routine name…" maxlength="40"/>
+      <input class="rname-input" id="rname-input" placeholder="Routine name…" maxlength="40"/>
       <div class="sec-label">Exercises</div>
       <div id="ex-list"></div>
       <button class="add-btn" onclick="openForm()">+ Add exercise</button>
@@ -220,49 +212,54 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:15px;}
 
   <!-- ACTIVE SESSION -->
   <div class="screen" id="s-active">
-    <div class="session-header">
-      <div class="session-routine-name" id="sess-rname"></div>
-      <button class="nav-btn" id="sess-pause-nav" onclick="togglePause()">⏸</button>
+    <div class="sess-header">
+      <div class="sess-rname" id="sess-rname"></div>
+      <button class="nav-btn" id="pause-nav" onclick="togglePause()">⏸</button>
     </div>
-    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
-    <div class="session-body" id="sess-body">
-      <div class="phase-badge" id="phase-badge">Get ready</div>
-      <div class="ex-title" id="sess-ex-name">—</div>
-      <div class="ex-subtitle" id="sess-ex-sub"></div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="sess-body" id="sess-body">
+      <!-- countdown overlay -->
+      <div class="cd-overlay" id="cd-overlay" style="display:none;">
+        <div class="cd-num" id="cd-num"></div>
+        <div class="cd-go" id="cd-go">GO</div>
+        <div class="cd-exname" id="cd-exname"></div>
+      </div>
+      <div class="phase-badge" id="phase-badge"></div>
+      <div class="ex-title" id="ex-title"></div>
+      <div class="ex-sub" id="ex-sub"></div>
       <!-- timed -->
       <div id="timer-block">
         <div class="timer-wrap">
           <svg viewBox="0 0 190 190" width="190" height="190">
             <circle class="ring-bg" cx="95" cy="95" r="82"/>
-            <circle class="ring-fg" id="ring-fg" cx="95" cy="95" r="82"
-              stroke="#da7756" stroke-dasharray="515" stroke-dashoffset="0"/>
+            <circle class="ring-fg" id="ring-fg" cx="95" cy="95" r="82" stroke="#da7756"/>
           </svg>
           <div class="timer-inner">
-            <div class="timer-val" id="timer-val">0</div>
-            <div class="timer-lbl">sec</div>
+            <div class="tval" id="tval">0</div>
+            <div class="tlbl">sec</div>
           </div>
         </div>
         <div class="dots-row" id="dots-row"></div>
         <div class="controls">
-          <button class="ctrl" onclick="prevStep()" title="Previous">⟨</button>
+          <button class="ctrl" onclick="prevStep()">⟨</button>
           <button class="ctrl main" id="play-btn" onclick="togglePause()">⏸</button>
-          <button class="ctrl" onclick="nextStep()" title="Skip">⟩</button>
+          <button class="ctrl" onclick="nextStep()">⟩</button>
         </div>
       </div>
       <!-- rep-based -->
-      <div id="rep-block" style="display:none;text-align:center;">
-        <div class="rep-counter" id="rep-count-lbl">Rep 1</div>
-        <div class="rep-lbl" id="rep-total-lbl">of 6</div>
-        <div class="dots-row" id="rep-dots-row" style="justify-content:center;margin-bottom:28px;"></div>
-        <button class="tap-next" onclick="repNext()">Done — next rep</button>
-        <div class="controls" style="margin-top:16px;">
+      <div id="rep-block" class="rep-block">
+        <div class="rep-big" id="rep-big">Rep 1</div>
+        <div class="rep-of" id="rep-of">of 6</div>
+        <div class="dots-row" id="rep-dots"></div>
+        <button class="tap-btn" onclick="repNext()">Done — next rep</button>
+        <div class="controls">
           <button class="ctrl" onclick="prevStep()">⟨</button>
           <button class="ctrl" onclick="nextStep()">⟩</button>
         </div>
       </div>
       <div class="next-hint" id="next-hint"></div>
     </div>
-    <div class="session-footer">
+    <div class="sess-footer">
       <button class="stop-btn" onclick="confirmStop()">Stop routine</button>
     </div>
   </div>
@@ -290,41 +287,30 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:15px;}
 
 </div>
 
-<!-- Exercise Form Sheet -->
+<!-- Form sheet -->
 <div class="sheet-backdrop" id="sheet-backdrop" onclick="closeForm()"></div>
 <div class="sheet" id="ex-sheet">
   <div class="sheet-handle"></div>
   <div class="sheet-title" id="sheet-title">Add exercise</div>
   <div class="field">
-    <label class="field-label">Name</label>
-    <input class="field-input" id="f-name" placeholder="e.g. Side plank" maxlength="40"/>
+    <label class="flabel">Name</label>
+    <input class="finput" id="f-name" placeholder="e.g. Side plank" maxlength="40"/>
   </div>
   <div class="fields-row">
-    <div class="field" style="margin:0">
-      <label class="field-label">Duration (s)</label>
-      <input class="field-input" id="f-dur" type="number" placeholder="15" min="1" max="600"/>
-    </div>
-    <div class="field" style="margin:0">
-      <label class="field-label">Reps/Sets</label>
-      <input class="field-input" id="f-reps" type="number" placeholder="3" min="1" max="99"/>
-    </div>
-    <div class="field" style="margin:0">
-      <label class="field-label">Rest (s)</label>
-      <input class="field-input" id="f-rest" type="number" placeholder="5" min="0" max="120"/>
-    </div>
+    <div><label class="flabel">Duration (s)</label><input class="finput" id="f-dur" type="number" placeholder="15" min="1" max="600"/></div>
+    <div><label class="flabel">Reps / Sets</label><input class="finput" id="f-reps" type="number" placeholder="3" min="1" max="99"/></div>
+    <div><label class="flabel">Rest (s)</label><input class="finput" id="f-rest" type="number" placeholder="5" min="0" max="120"/></div>
   </div>
   <div class="toggle-row">
-    <div class="toggle-wrap">
-      <span class="toggle-label">Both sides</span>
-      <span class="toggle-sub">Left then right each set</span>
-    </div>
-    <button class="toggle" id="f-sides" onclick="this.classList.toggle('on')"></button>
+    <div class="twrap"><span class="tlabel">Both sides</span><span class="tsub">Left and right each set</span></div>
+    <button class="toggle" id="f-sides" onclick="onSidesToggle()"></button>
   </div>
-  <div class="toggle-row" style="border:none;margin-bottom:0;">
-    <div class="toggle-wrap">
-      <span class="toggle-label">Rep-based (no timer)</span>
-      <span class="toggle-sub">Tap done after each rep</span>
-    </div>
+  <div class="toggle-row" id="f-altrow" style="display:none;">
+    <div class="twrap"><span class="tlabel">Alternating sides</span><span class="tsub">L→R→L→R (off = all left, then all right)</span></div>
+    <button class="toggle on" id="f-alt" onclick="this.classList.toggle('on')"></button>
+  </div>
+  <div class="toggle-row" style="border:none;">
+    <div class="twrap"><span class="tlabel">Rep-based (no timer)</span><span class="tsub">Tap done after each rep</span></div>
     <button class="toggle" id="f-rep" onclick="this.classList.toggle('on')"></button>
   </div>
   <div class="sheet-actions">
@@ -333,14 +319,14 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:15px;}
   </div>
 </div>
 
-<!-- Confirm stop dialog -->
+<!-- Stop dialog -->
 <div class="dialog-backdrop" id="stop-dialog">
   <div class="dialog">
     <div class="dialog-title">Stop routine?</div>
     <div class="dialog-msg">Your progress will not be saved. Are you sure?</div>
     <div class="dialog-actions">
       <button class="dialog-cancel" onclick="closeDialog()">Keep going</button>
-      <button class="dialog-confirm" onclick="stopSession()">Stop</button>
+      <button class="dialog-confirm" onclick="doStop()">Stop</button>
     </div>
   </div>
 </div>
@@ -348,507 +334,469 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);font-size:15px;}
 <div class="toast" id="toast"></div>
 
 <script>
-// ── Storage ──────────────────────────────────────────────────────────
-const STORE_KEY = 'stretch-timer-routines';
-function loadRoutines(){
-  try{ return JSON.parse(localStorage.getItem(STORE_KEY))||[]; }catch{ return []; }
-}
-function saveRoutines(r){ localStorage.setItem(STORE_KEY, JSON.stringify(r)); }
+// ── Storage ───────────────────────────────────────────────────────
+const SK='stretch-timer-v2';
+function load(){ try{ return JSON.parse(localStorage.getItem(SK))||[]; }catch{ return []; } }
+function save(r){ localStorage.setItem(SK,JSON.stringify(r)); }
 
-// ── State ──────────────────────────────────────────────────────────
-let routines = loadRoutines();
-let editingRoutineId = null;
-let editingExIdx = null;
-let draftExercises = [];
-let session = null; // active session state
-let sessionStartTime = null;
+// ── App state ─────────────────────────────────────────────────────
+let routines=load();
+let editingRId=null, editingExIdx=null, draft=[];
+let sess=null, sessStart=null;
 
-// ── Utilities ─────────────────────────────────────────────────────
+// ── Util ──────────────────────────────────────────────────────────
+const CIRC=2*Math.PI*82; // r=82 → 515.22
 function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
-}
+function $(id){ return document.getElementById(id); }
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); $(id).classList.add('active'); }
+function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+
 function exDetail(ex){
-  let parts=[];
-  if(!ex.repBased && ex.duration) parts.push(ex.duration+'s hold');
-  if(ex.reps) parts.push(ex.reps+(ex.repBased?' reps':' sets'));
-  if(ex.sides) parts.push('each side');
-  if(ex.rest) parts.push(ex.rest+'s rest');
-  if(ex.repBased) parts.push('tap to advance');
-  return parts.join(' · ')||'no config';
+  const p=[];
+  if(!ex.repBased&&ex.duration) p.push(ex.duration+'s');
+  if(ex.reps) p.push(ex.reps+(ex.repBased?' reps':' sets'));
+  if(ex.sides) p.push(ex.alternating?'alt. sides':'each side');
+  if(ex.rest) p.push(ex.rest+'s rest');
+  if(ex.repBased) p.push('tap');
+  return p.join(' · ')||'—';
 }
-function estimateDuration(exArr){
+function estMin(exs){
   let t=0;
-  exArr.forEach(ex=>{
-    const sets=ex.reps||1;
-    const sides=ex.sides?2:1;
-    const dur=ex.repBased?5:(ex.duration||10);
-    const rest=ex.rest||0;
-    t+=(dur*sets*sides)+(rest*sets*sides);
-  });
-  return Math.round(t/60);
+  exs.forEach(e=>{ const s=e.reps||1,sd=e.sides?2:1,d=e.repBased?5:(e.duration||10); t+=(d*s*sd)+((e.rest||0)*s*sd); });
+  return Math.max(1,Math.round(t/60));
 }
 
 // ── Audio ─────────────────────────────────────────────────────────
-let audioCtx=null;
-function getAudio(){
-  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  return audioCtx;
-}
-function beep(freq=880, dur=0.12, vol=0.3){
+let actx=null;
+function getACtx(){ if(!actx) actx=new(window.AudioContext||window.webkitAudioContext)(); return actx; }
+function tone(f,d,v=0.28){
   try{
-    const ctx=getAudio();
-    const osc=ctx.createOscillator();
-    const gain=ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.frequency.value=freq;
-    osc.type='sine';
-    gain.gain.setValueAtTime(vol,ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+dur);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime+dur);
+    const c=getACtx(),o=c.createOscillator(),g=c.createGain();
+    o.connect(g); g.connect(c.destination);
+    o.frequency.value=f; o.type='sine';
+    g.gain.setValueAtTime(v,c.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);
+    o.start(); o.stop(c.currentTime+d);
   }catch(e){}
 }
-function beepDone(){ beep(660,.1,.2); setTimeout(()=>beep(880,.15,.25),120); }
-function beepCount(){ beep(440,.08,.15); }
-function beepTransition(){ beep(550,.08,.2); setTimeout(()=>beep(770,.12,.25),100); }
+function beepTick(){ tone(440,.08,.18); }
+function beepDone(){ tone(660,.1,.22); setTimeout(()=>tone(880,.14,.25),130); }
+function beepTrans(){ tone(550,.08,.2); setTimeout(()=>tone(770,.12,.25),110); }
+function beepCd(){ tone(700,.1,.25); }
+function beepGo(){ tone(880,.08,.3); setTimeout(()=>tone(1100,.14,.3),90); }
 
 // ── Speech ────────────────────────────────────────────────────────
-function speak(text){
-  if(!window.speechSynthesis) return;
-  const u=new SpeechSynthesisUtterance(text);
-  u.rate=1.05; u.pitch=1; u.volume=0.9;
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(u);
-}
+function speak(t){ if(!window.speechSynthesis) return; const u=new SpeechSynthesisUtterance(t); u.rate=1.05; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
 
-// ── Home screen ───────────────────────────────────────────────────
+// ── Home ──────────────────────────────────────────────────────────
 function renderHome(){
-  const list=document.getElementById('routine-list');
-  if(routines.length===0){
-    list.innerHTML=`<div class="empty-state"><div class="empty-state-icon">🧘</div><div class="empty-state-text">No routines yet.<br>Tap <b>+ New</b> to create your first one.</div></div>`;
+  const el=$('routine-list');
+  if(!routines.length){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">🧘</div><p style="font-size:14px;line-height:1.7;">No routines yet.<br>Tap <b>+ New</b> to get started.</p></div>';
     return;
   }
-  list.innerHTML=routines.map(r=>{
-    const mins=estimateDuration(r.exercises);
-    const exCount=r.exercises.length;
+  el.innerHTML=routines.map(r=>{
+    const n=r.exercises.length;
     return `<div class="routine-card" onclick="startRoutine('${r.id}')">
       <div class="routine-card-info">
         <div class="routine-card-name">${r.name||'Untitled'}</div>
-        <div class="routine-card-meta">${exCount} exercise${exCount!==1?'s':''} · ~${mins} min</div>
+        <div class="routine-card-meta">${n} exercise${n!==1?'s':''} · ~${estMin(r.exercises)} min</div>
       </div>
       <div class="routine-card-actions">
-        <button class="icon-btn" onclick="event.stopPropagation();editRoutine('${r.id}')" title="Edit">✎</button>
-        <button class="icon-btn del" onclick="event.stopPropagation();deleteRoutine('${r.id}')" title="Delete">×</button>
+        <button class="icon-btn" onclick="event.stopPropagation();editRoutine('${r.id}')">✎</button>
+        <button class="icon-btn del" onclick="event.stopPropagation();delRoutine('${r.id}')">×</button>
       </div>
     </div>`;
   }).join('');
 }
-
-function newRoutine(){
-  editingRoutineId=null;
-  draftExercises=[];
-  document.getElementById('editor-title').textContent='New routine';
-  document.getElementById('routine-name-input').value='';
-  renderExList();
-  showScreen('s-editor');
-}
-function editRoutine(id){
-  const r=routines.find(x=>x.id===id);
-  if(!r) return;
-  editingRoutineId=id;
-  draftExercises=JSON.parse(JSON.stringify(r.exercises));
-  document.getElementById('editor-title').textContent='Edit routine';
-  document.getElementById('routine-name-input').value=r.name||'';
-  renderExList();
-  showScreen('s-editor');
-}
-function deleteRoutine(id){
-  routines=routines.filter(r=>r.id!==id);
-  saveRoutines(routines);
-  renderHome();
-  toast('Routine deleted');
-}
+function newRoutine(){ editingRId=null; draft=[]; $('editor-title').textContent='New routine'; $('rname-input').value=''; renderExList(); showScreen('s-editor'); }
+function editRoutine(id){ const r=routines.find(x=>x.id===id); if(!r) return; editingRId=id; draft=JSON.parse(JSON.stringify(r.exercises)); $('editor-title').textContent='Edit routine'; $('rname-input').value=r.name||''; renderExList(); showScreen('s-editor'); }
+function delRoutine(id){ routines=routines.filter(r=>r.id!==id); save(routines); renderHome(); toast('Deleted'); }
 function cancelEditor(){ showScreen('s-home'); renderHome(); }
 function saveRoutine(){
-  const name=document.getElementById('routine-name-input').value.trim()||'My routine';
-  if(draftExercises.length===0){ toast('Add at least one exercise'); return; }
-  if(editingRoutineId){
-    const idx=routines.findIndex(r=>r.id===editingRoutineId);
-    if(idx>=0){ routines[idx].name=name; routines[idx].exercises=draftExercises; }
-  } else {
-    routines.push({id:uid(),name,exercises:draftExercises});
-  }
-  saveRoutines(routines);
-  renderHome();
-  showScreen('s-home');
-  toast('Routine saved ✓');
+  const name=$('rname-input').value.trim()||'My routine';
+  if(!draft.length){ toast('Add at least one exercise'); return; }
+  if(editingRId){ const i=routines.findIndex(r=>r.id===editingRId); if(i>=0){ routines[i].name=name; routines[i].exercises=draft; } }
+  else routines.push({id:uid(),name,exercises:draft});
+  save(routines); renderHome(); showScreen('s-home'); toast('Saved ✓');
 }
 
-// ── Exercise editor list ───────────────────────────────────────────
+// ── Exercise list + drag ──────────────────────────────────────────
+let dragIdx=null, touchIdx=null, touchClone=null, touchLastOver=null, touchY0=0;
+
 function renderExList(){
-  const list=document.getElementById('ex-list');
-  if(draftExercises.length===0){
-    list.innerHTML='';
-    return;
-  }
-  list.innerHTML=draftExercises.map((ex,i)=>`
-    <div class="ex-item">
-      <div class="ex-drag">⠿</div>
+  const el=$('ex-list');
+  if(!draft.length){ el.innerHTML=''; return; }
+  el.innerHTML=draft.map((ex,i)=>`
+    <div class="ex-item" data-i="${i}">
+      <div class="ex-drag" data-i="${i}">⠿</div>
       <div class="ex-info">
-        <div class="ex-name">${ex.name||'Untitled'}</div>
+        <div class="ex-name">${ex.name}</div>
         <div class="ex-detail">${exDetail(ex)}</div>
       </div>
-      <button class="icon-btn" onclick="editEx(${i})" title="Edit">✎</button>
-      <button class="icon-btn del" onclick="removeEx(${i})" title="Remove">×</button>
+      <button class="icon-btn" onclick="editEx(${i})">✎</button>
+      <button class="icon-btn del" onclick="rmEx(${i})">×</button>
     </div>`).join('');
+
+  el.querySelectorAll('.ex-drag').forEach(h=>{
+    h.addEventListener('mousedown', mDragStart);
+    h.addEventListener('touchstart', tDragStart, {passive:true});
+  });
+  el.querySelectorAll('.ex-item').forEach(item=>{
+    item.addEventListener('dragover', e=>{ e.preventDefault(); mDragOver(item); });
+    item.addEventListener('drop', e=>{ e.preventDefault(); mDrop(item); });
+    item.addEventListener('dragend', mDragEnd);
+  });
 }
-function removeEx(i){ draftExercises.splice(i,1); renderExList(); }
+
+// Mouse drag
+function mDragStart(e){
+  const item=e.currentTarget.closest('.ex-item');
+  dragIdx=+item.dataset.i;
+  item.setAttribute('draggable','true');
+  item.classList.add('dragging');
+  item.addEventListener('dragstart',ev=>ev.dataTransfer.effectAllowed='move',{once:true});
+}
+function mDragOver(item){
+  $('ex-list').querySelectorAll('.ex-item').forEach(i=>i.classList.remove('drag-over'));
+  if(+item.dataset.i!==dragIdx) item.classList.add('drag-over');
+}
+function mDrop(item){
+  const to=+item.dataset.i;
+  if(dragIdx===null||dragIdx===to) return;
+  draft.splice(to,0,draft.splice(dragIdx,1)[0]);
+  renderExList();
+}
+function mDragEnd(){
+  dragIdx=null;
+  $('ex-list').querySelectorAll('.ex-item').forEach(i=>{ i.classList.remove('dragging','drag-over'); i.removeAttribute('draggable'); });
+}
+
+// Touch drag
+function tDragStart(e){
+  const item=e.currentTarget.closest('.ex-item');
+  touchIdx=+item.dataset.i; touchY0=e.touches[0].clientY; touchLastOver=null;
+  item.classList.add('dragging');
+  const r=item.getBoundingClientRect();
+  touchClone=item.cloneNode(true);
+  Object.assign(touchClone.style,{position:'fixed',left:r.left+'px',top:r.top+'px',width:r.width+'px',opacity:'.8',zIndex:'999',pointerEvents:'none',background:'var(--surface2)',borderRadius:'var(--r-lg)',transition:'none'});
+  document.body.appendChild(touchClone);
+  document.addEventListener('touchmove',tDragMove,{passive:false});
+  document.addEventListener('touchend',tDragEnd,{once:true});
+}
+function tDragMove(e){
+  e.preventDefault();
+  const y=e.touches[0].clientY, dy=y-touchY0; touchY0=y;
+  if(touchClone) touchClone.style.top=(parseFloat(touchClone.style.top)+dy)+'px';
+  $('ex-list').querySelectorAll('.ex-item').forEach(i=>i.classList.remove('drag-over'));
+  const el=document.elementFromPoint(e.touches[0].clientX,y)?.closest('.ex-item');
+  if(el){ const oi=+el.dataset.i; if(oi!==touchIdx){ el.classList.add('drag-over'); touchLastOver=oi; } else touchLastOver=null; }
+}
+function tDragEnd(){
+  document.removeEventListener('touchmove',tDragMove);
+  if(touchClone){ touchClone.remove(); touchClone=null; }
+  $('ex-list').querySelectorAll('.ex-item').forEach(i=>i.classList.remove('dragging','drag-over'));
+  if(touchIdx!==null&&touchLastOver!==null&&touchIdx!==touchLastOver){
+    draft.splice(touchLastOver,0,draft.splice(touchIdx,1)[0]);
+    renderExList();
+  }
+  touchIdx=null; touchLastOver=null;
+}
+
+function rmEx(i){ draft.splice(i,1); renderExList(); }
 function editEx(i){
-  editingExIdx=i;
-  const ex=draftExercises[i];
-  document.getElementById('f-name').value=ex.name||'';
-  document.getElementById('f-dur').value=ex.duration||'';
-  document.getElementById('f-reps').value=ex.reps||'';
-  document.getElementById('f-rest').value=ex.rest||'';
-  document.getElementById('f-sides').classList.toggle('on',!!ex.sides);
-  document.getElementById('f-rep').classList.toggle('on',!!ex.repBased);
-  document.getElementById('sheet-title').textContent='Edit exercise';
-  document.getElementById('sheet-confirm-btn').textContent='Save changes';
+  editingExIdx=i; const ex=draft[i];
+  $('f-name').value=ex.name||'';
+  $('f-dur').value=ex.duration||'';
+  $('f-reps').value=ex.reps||'';
+  $('f-rest').value=ex.rest||'';
+  $('f-sides').classList.toggle('on',!!ex.sides);
+  $('f-alt').classList.toggle('on',ex.alternating!==false);
+  $('f-altrow').style.display=ex.sides?'flex':'none';
+  $('f-rep').classList.toggle('on',!!ex.repBased);
+  $('sheet-title').textContent='Edit exercise';
+  $('sheet-confirm-btn').textContent='Save changes';
   openForm();
 }
 
-// ── Exercise form sheet ────────────────────────────────────────────
+// ── Form sheet ────────────────────────────────────────────────────
+function onSidesToggle(){
+  $('f-sides').classList.toggle('on');
+  $('f-altrow').style.display=$('f-sides').classList.contains('on')?'flex':'none';
+}
 function openForm(){
   if(editingExIdx===null){
-    document.getElementById('f-name').value='';
-    document.getElementById('f-dur').value='';
-    document.getElementById('f-reps').value='';
-    document.getElementById('f-rest').value='';
-    document.getElementById('f-sides').classList.remove('on');
-    document.getElementById('f-rep').classList.remove('on');
-    document.getElementById('sheet-title').textContent='Add exercise';
-    document.getElementById('sheet-confirm-btn').textContent='Add exercise';
+    $('f-name').value=''; $('f-dur').value=''; $('f-reps').value=''; $('f-rest').value='';
+    $('f-sides').classList.remove('on'); $('f-alt').classList.add('on');
+    $('f-altrow').style.display='none'; $('f-rep').classList.remove('on');
+    $('sheet-title').textContent='Add exercise';
+    $('sheet-confirm-btn').textContent='Add exercise';
   }
-  document.getElementById('sheet-backdrop').classList.add('open');
-  document.getElementById('ex-sheet').classList.add('open');
-  setTimeout(()=>document.getElementById('f-name').focus(),350);
+  $('sheet-backdrop').classList.add('open');
+  $('ex-sheet').classList.add('open');
+  setTimeout(()=>$('f-name').focus(),340);
 }
-function closeForm(){
-  document.getElementById('sheet-backdrop').classList.remove('open');
-  document.getElementById('ex-sheet').classList.remove('open');
-  editingExIdx=null;
-}
+function closeForm(){ $('sheet-backdrop').classList.remove('open'); $('ex-sheet').classList.remove('open'); editingExIdx=null; }
 function confirmExercise(){
-  const name=document.getElementById('f-name').value.trim();
-  if(!name){ document.getElementById('f-name').focus(); return; }
-  const dur=parseInt(document.getElementById('f-dur').value)||0;
-  const reps=parseInt(document.getElementById('f-reps').value)||1;
-  const rest=parseInt(document.getElementById('f-rest').value)||0;
-  const sides=document.getElementById('f-sides').classList.contains('on');
-  const repBased=document.getElementById('f-rep').classList.contains('on');
-  const ex={name,duration:dur||10,reps,rest,sides,repBased};
-  if(repBased) ex.duration=0;
-  if(editingExIdx!==null){
-    draftExercises[editingExIdx]=ex;
-  } else {
-    draftExercises.push(ex);
-  }
-  renderExList();
-  closeForm();
+  const name=$('f-name').value.trim(); if(!name){ $('f-name').focus(); return; }
+  const dur=parseInt($('f-dur').value)||10;
+  const reps=parseInt($('f-reps').value)||1;
+  const rest=parseInt($('f-rest').value)||0;
+  const sides=$('f-sides').classList.contains('on');
+  const alternating=$('f-alt').classList.contains('on');
+  const repBased=$('f-rep').classList.contains('on');
+  const ex={name,duration:repBased?0:dur,reps,rest,sides,alternating,repBased};
+  if(editingExIdx!==null) draft[editingExIdx]=ex; else draft.push(ex);
+  renderExList(); closeForm();
 }
 
-// ── Session ───────────────────────────────────────────────────────
-// Build a flat step list from exercises
-function buildSteps(exercises){
+// ── Build step list ───────────────────────────────────────────────
+function buildSteps(exs){
   const steps=[];
-  exercises.forEach((ex,ei)=>{
-    const sides=ex.sides?['Left','Right']:[''];
-    for(let s=0;s<sides.length;s++){
+  exs.forEach((ex,ei)=>{
+    const isLastEx=ei===exs.length-1;
+    if(ex.sides&&ex.alternating){
+      // interleave: L, R, L, R …
       for(let r=0;r<ex.reps;r++){
-        steps.push({
-          exIdx:ei,
-          name:ex.name,
-          side:sides[s],
-          repNum:r+1,
-          totalReps:ex.reps,
-          duration:ex.duration,
-          repBased:ex.repBased,
-          rest:ex.rest,
-          isLastRepOfSide:r===ex.reps-1,
-          isLastSide:s===sides.length-1,
-          sideIdx:s,
-          totalSides:sides.length
+        ['Left','Right'].forEach((side,si)=>{
+          steps.push({name:ex.name,side,repNum:r+1,totalReps:ex.reps,duration:ex.duration,repBased:ex.repBased,rest:ex.rest,totalSides:2});
+          const last=r===ex.reps-1&&si===1;
+          if(ex.rest>0&&!(last&&isLastEx)) steps.push({isRest:true,duration:ex.rest});
         });
-        // rest step after each set (except last set of last side)
-        const isVeryLast=(ei===exercises.length-1)&&(s===sides.length-1)&&(r===ex.reps-1);
-        if(ex.rest>0 && !isVeryLast){
-          steps.push({
-            isRest:true,
-            duration:ex.rest,
-            nextName:null, // filled below
-            nextSide:null
-          });
+      }
+    } else if(ex.sides){
+      // all left then all right
+      ['Left','Right'].forEach((side,si)=>{
+        for(let r=0;r<ex.reps;r++){
+          steps.push({name:ex.name,side,repNum:r+1,totalReps:ex.reps,duration:ex.duration,repBased:ex.repBased,rest:ex.rest,totalSides:2});
+          const last=si===1&&r===ex.reps-1;
+          if(ex.rest>0&&!(last&&isLastEx)) steps.push({isRest:true,duration:ex.rest});
         }
+      });
+    } else {
+      for(let r=0;r<ex.reps;r++){
+        steps.push({name:ex.name,side:'',repNum:r+1,totalReps:ex.reps,duration:ex.duration,repBased:ex.repBased,rest:ex.rest,totalSides:1});
+        const last=r===ex.reps-1;
+        if(ex.rest>0&&!(last&&isLastEx)) steps.push({isRest:true,duration:ex.rest});
       }
     }
   });
-  // fill nextName for rest steps
-  for(let i=0;i<steps.length;i++){
-    if(steps[i].isRest){
-      for(let j=i+1;j<steps.length;j++){
-        if(!steps[j].isRest){ steps[i].nextName=steps[j].name; steps[i].nextSide=steps[j].side; break; }
-      }
-    }
-  }
+  // annotate next for rest steps
+  for(let i=0;i<steps.length;i++) if(steps[i].isRest)
+    for(let j=i+1;j<steps.length;j++) if(!steps[j].isRest){ steps[i].next=steps[j]; break; }
   return steps;
 }
 
-function startRoutine(id){
-  const r=routines.find(x=>x.id===id);
-  if(!r||!r.exercises.length){ toast('No exercises in this routine'); return; }
-  _startSession(r);
-}
-function startFromEditor(){
-  const name=document.getElementById('routine-name-input').value.trim()||'My routine';
-  if(!draftExercises.length){ toast('Add at least one exercise'); return; }
-  _startSession({id:'draft',name,exercises:draftExercises});
-}
-function _startSession(r){
+// ── Session start ─────────────────────────────────────────────────
+function startRoutine(id){ const r=routines.find(x=>x.id===id); if(!r||!r.exercises.length){ toast('No exercises'); return; } _start(r); }
+function startFromEditor(){ const name=$('rname-input').value.trim()||'Routine'; if(!draft.length){ toast('Add at least one exercise'); return; } _start({id:'draft',name,exercises:draft}); }
+function restartSession(){ if(sess) _start(sess.routine); }
+function _start(r){
+  _clearSess();
   const steps=buildSteps(r.exercises);
-  sessionStartTime=Date.now();
-  session={
-    routine:r,
-    steps,
-    stepIdx:0,
-    paused:false,
-    timeLeft:0,
-    timerInterval:null,
-    totalSets:steps.filter(s=>!s.isRest).length,
-    doneSets:0
-  };
-  document.getElementById('sess-rname').textContent=r.name;
+  sessStart=Date.now();
+  sess={routine:r,steps,idx:0,paused:false,tLeft:0,tInterval:null,cdInterval:null,doneSets:0,inCd:false};
+  $('sess-rname').textContent=r.name;
   showScreen('s-active');
-  renderStep();
   speak('Starting '+r.name);
+  runCd(()=>renderStep());
 }
-function restartSession(){
-  if(session) _startSession(session.routine);
+function _clearSess(){
+  if(!sess) return;
+  clearInterval(sess.tInterval); clearInterval(sess.cdInterval);
+  $('cd-overlay').style.display='none';
+  sess=null;
+}
+
+// ── 3-2-1-GO ─────────────────────────────────────────────────────
+function runCd(cb){
+  if(!sess) return;
+  sess.inCd=true;
+  const ov=$('cd-overlay'), numEl=$('cd-num'), goEl=$('cd-go'), exEl=$('cd-exname');
+  ov.style.display='flex'; numEl.classList.remove('show'); goEl.classList.remove('show');
+  // show next exercise name
+  const nextStep=sess.steps[sess.idx];
+  exEl.textContent=nextStep&&!nextStep.isRest?(nextStep.name+(nextStep.side?' · '+nextStep.side:'')):'';
+  let c=3;
+  function tick(){
+    numEl.classList.remove('show'); goEl.classList.remove('show');
+    void numEl.offsetWidth;
+    if(c>0){ numEl.textContent=c; numEl.classList.add('show'); beepCd(); }
+    else { goEl.classList.add('show'); beepGo(); }
+  }
+  tick();
+  sess.cdInterval=setInterval(()=>{
+    c--;
+    if(c>=0){ tick(); }
+    else { clearInterval(sess.cdInterval); ov.style.display='none'; sess.inCd=false; cb(); }
+  },1000);
+}
+
+// ── Render step ───────────────────────────────────────────────────
+function setRing(frac, color){
+  const arc=$('ring-fg');
+  arc.style.stroke=color||'#da7756';
+  arc.style.strokeDasharray=CIRC;
+  arc.style.strokeDashoffset=CIRC*(1-Math.max(0,Math.min(1,frac)));
+}
+function snapRing(frac,color){
+  const arc=$('ring-fg');
+  arc.style.transition='none';
+  setRing(frac,color);
+  void arc.offsetWidth; // reflow to commit
+  arc.style.transition='stroke-dashoffset 1s linear, stroke .3s';
+}
+function renderDots(id,cur,total){
+  let h=''; const max=Math.min(total,12);
+  for(let i=1;i<=max;i++) h+=`<div class="dot${i<cur?' done':i===cur?' cur':''}"></div>`;
+  $(id).innerHTML=h;
 }
 
 function renderStep(){
-  if(!session) return;
-  clearInterval(session.timerInterval);
-  const step=session.steps[session.stepIdx];
-  const total=session.steps.length;
-  document.getElementById('prog-fill').style.width=Math.round((session.stepIdx/total)*100)+'%';
+  if(!sess) return;
+  clearInterval(sess.tInterval);
+  const step=sess.steps[sess.idx];
+  const total=sess.steps.filter(s=>!s.isRest).length;
+  const done=sess.steps.slice(0,sess.idx).filter(s=>!s.isRest).length;
+  $('prog-fill').style.width=Math.round((done/total)*100)+'%';
 
-  if(step.isRest){
-    renderRestStep(step); return;
-  }
+  if(step.isRest){ renderRest(step); return; }
 
-  // normal step
-  document.getElementById('phase-badge').textContent=
-    step.side ? step.side+' side' : (step.repBased?'Rep-based':'Timed');
-  document.getElementById('sess-ex-name').textContent=step.name;
+  $('phase-badge').textContent=step.side?step.side+' side':(step.repBased?'Rep-based':'Timed');
+  $('ex-title').textContent=step.name;
+  $('ex-sub').textContent=step.totalReps>1?'Set '+step.repNum+' of '+step.totalReps:'';
 
-  // subtitle: set info
-  let sub='';
-  if(step.totalReps>1) sub='Set '+step.repNum+' of '+step.totalReps;
-  if(step.totalSides>1) sub+=(sub?' · ':'')+['Left','Right'][step.sideIdx]+' side';
-  document.getElementById('sess-ex-sub').textContent=sub;
-
-  // next hint
-  const nextStep=session.steps[session.stepIdx+1];
-  if(nextStep){
-    if(nextStep.isRest) document.getElementById('next-hint').innerHTML='next: <b>Rest '+nextStep.duration+'s</b>';
-    else document.getElementById('next-hint').innerHTML='next: <b>'+nextStep.name+(nextStep.side?' · '+nextStep.side:'')+'</b>';
-  } else {
-    document.getElementById('next-hint').innerHTML='<b>Last exercise!</b>';
-  }
-
-  // dots for reps
-  const dotsContainer=step.repBased?'rep-dots-row':'dots-row';
-  const otherDots=step.repBased?'dots-row':'rep-dots-row';
-  renderDots(dotsContainer,step.repNum,step.totalReps);
-  document.getElementById(otherDots).innerHTML='';
+  const nxt=sess.steps[sess.idx+1];
+  $('next-hint').innerHTML=nxt?(nxt.isRest?'next: <b>Rest '+nxt.duration+'s</b>':'next: <b>'+nxt.name+(nxt.side?' · '+nxt.side:'')+'</b>'):'<b>Last one!</b>';
 
   if(step.repBased){
-    document.getElementById('timer-block').style.display='none';
-    document.getElementById('rep-block').style.display='block';
-    document.getElementById('rep-count-lbl').textContent='Rep '+step.repNum;
-    document.getElementById('rep-total-lbl').textContent='of '+step.totalReps;
-    // announce
-    announceStep(step);
+    $('timer-block').style.display='none';
+    $('rep-block').style.display='flex';
+    $('rep-big').textContent='Rep '+step.repNum;
+    $('rep-of').textContent='of '+step.totalReps;
+    renderDots('rep-dots',step.repNum,step.totalReps);
+    $('dots-row').innerHTML='';
+    speak(step.name+(step.side?', '+step.side+' side':''));
   } else {
-    document.getElementById('timer-block').style.display='block';
-    document.getElementById('rep-block').style.display='none';
-    session.timeLeft=step.duration;
-    updateTimerUI(session.timeLeft,step.duration);
-    announceStep(step);
-    startCountdown();
+    $('timer-block').style.display='block';
+    $('rep-block').style.display='none';
+    renderDots('dots-row',step.repNum,step.totalReps);
+    $('rep-dots').innerHTML='';
+    sess.tLeft=step.duration;
+    snapRing(1,'#da7756'); // start full
+    $('tval').textContent=step.duration;
+    speak(step.name+(step.side?', '+step.side+' side':''));
+    startTick();
   }
 }
 
-function renderRestStep(step){
-  document.getElementById('phase-badge').textContent='Rest';
-  document.getElementById('sess-ex-name').textContent='Rest';
-  document.getElementById('sess-ex-sub').textContent='';
-  document.getElementById('next-hint').innerHTML=step.nextName?'next: <b>'+step.nextName+(step.nextSide?' · '+step.nextSide:'')+'</b>':'';
-  document.getElementById('timer-block').style.display='block';
-  document.getElementById('rep-block').style.display='none';
-  document.getElementById('dots-row').innerHTML='';
-  document.getElementById('rep-dots-row').innerHTML='';
-  const arc=document.getElementById('ring-fg');
-  arc.style.stroke='#5f8fa8';
-  session.timeLeft=step.duration;
-  updateTimerUI(session.timeLeft,step.duration);
+function renderRest(step){
+  $('phase-badge').textContent='Rest';
+  $('ex-title').textContent='Rest';
+  $('ex-sub').textContent='';
+  $('dots-row').innerHTML=''; $('rep-dots').innerHTML='';
+  $('timer-block').style.display='block';
+  $('rep-block').style.display='none';
+  const nxt=step.next;
+  $('next-hint').innerHTML=nxt?'next: <b>'+nxt.name+(nxt.side?' · '+nxt.side:'')+'</b>':'';
+  sess.tLeft=step.duration;
+  snapRing(1,'#5f8fa8');
+  $('tval').textContent=step.duration;
   speak('Rest');
-  startCountdown();
+  startTick();
 }
 
-function renderDots(containerId, current, total){
-  const c=document.getElementById(containerId);
-  let h='';
-  for(let i=1;i<=total;i++){
-    if(i<current) h+='<div class="dot done"></div>';
-    else if(i===current) h+='<div class="dot cur"></div>';
-    else h+='<div class="dot"></div>';
-  }
-  c.innerHTML=h;
-}
-
-function announceStep(step){
-  let msg=step.name;
-  if(step.side) msg+=', '+step.side+' side';
-  speak(msg);
-}
-
-function startCountdown(){
-  if(session.paused) return;
-  const arc=document.getElementById('ring-fg');
-  const step=session.steps[session.stepIdx];
-  if(!step.isRest) arc.style.stroke='#da7756';
-  clearInterval(session.timerInterval);
-  session.timerInterval=setInterval(()=>{
-    if(session.paused) return;
-    session.timeLeft--;
-    updateTimerUI(session.timeLeft, step.duration||step.duration);
-    if(session.timeLeft<=3 && session.timeLeft>0) beepCount();
-    if(session.timeLeft<=0){
-      clearInterval(session.timerInterval);
+// ── Countdown tick ────────────────────────────────────────────────
+function startTick(){
+  if(!sess||sess.paused) return;
+  clearInterval(sess.tInterval);
+  const max=sess.tLeft; // capture full duration at start of this step
+  sess.tInterval=setInterval(()=>{
+    if(!sess||sess.paused) return;
+    sess.tLeft--;
+    const v=Math.max(0,sess.tLeft);
+    $('tval').textContent=v;
+    // ring drains from full (frac=1) at max, to empty (frac=0) at 0
+    // frac = tLeft / max, but we use original max so 0→empty
+    $('ring-fg').style.strokeDashoffset=CIRC*(1-(v/max));
+    if(v>0&&v<=3) beepTick();
+    if(v<=0){
+      // fully empty
+      $('ring-fg').style.transition='none';
+      $('ring-fg').style.strokeDashoffset=CIRC;
+      void $('ring-fg').offsetWidth;
+      $('ring-fg').style.transition='stroke-dashoffset 1s linear, stroke .3s';
+      clearInterval(sess.tInterval);
       beepDone();
-      advanceStep();
+      setTimeout(advance, 350);
     }
   },1000);
 }
 
-function updateTimerUI(val, max){
-  document.getElementById('timer-val').textContent=Math.max(0,val);
-  const circ=2*Math.PI*82; // r=82
-  const frac=max>0?Math.max(0,val/max):0;
-  document.getElementById('ring-fg').style.strokeDasharray=circ;
-  document.getElementById('ring-fg').style.strokeDashoffset=circ*(1-frac);
+function advance(){
+  if(!sess) return;
+  const step=sess.steps[sess.idx];
+  if(!step.isRest) sess.doneSets++;
+  sess.idx++;
+  if(sess.idx>=sess.steps.length){ finish(); return; }
+  beepTrans();
+  const nxt=sess.steps[sess.idx];
+  if(!nxt.isRest) runCd(()=>renderStep()); else renderStep();
 }
-
-function advanceStep(){
-  if(!session) return;
-  const step=session.steps[session.stepIdx];
-  if(!step.isRest) session.doneSets++;
-  session.stepIdx++;
-  if(session.stepIdx>=session.steps.length){
-    finishSession(); return;
-  }
-  beepTransition();
-  renderStep();
-}
-
 function repNext(){
-  if(!session) return;
-  beepDone();
-  session.doneSets++;
-  session.stepIdx++;
-  if(session.stepIdx>=session.steps.length){ finishSession(); return; }
-  beepTransition();
-  renderStep();
+  if(!sess) return;
+  beepDone(); sess.doneSets++;
+  sess.idx++;
+  if(sess.idx>=sess.steps.length){ finish(); return; }
+  beepTrans();
+  const nxt=sess.steps[sess.idx];
+  if(!nxt.isRest) runCd(()=>renderStep()); else renderStep();
 }
-
 function prevStep(){
-  if(!session||session.stepIdx<=0) return;
-  clearInterval(session.timerInterval);
-  session.stepIdx=Math.max(0,session.stepIdx-1);
+  if(!sess||sess.idx<=0) return;
+  clearInterval(sess.tInterval); clearInterval(sess.cdInterval);
+  $('cd-overlay').style.display='none'; sess.inCd=false;
+  sess.idx=Math.max(0,sess.idx-1);
   renderStep();
 }
 function nextStep(){
-  if(!session) return;
-  clearInterval(session.timerInterval);
-  session.stepIdx++;
-  if(session.stepIdx>=session.steps.length){ finishSession(); return; }
-  renderStep();
+  if(!sess) return;
+  clearInterval(sess.tInterval); clearInterval(sess.cdInterval);
+  $('cd-overlay').style.display='none'; sess.inCd=false;
+  sess.idx++;
+  if(sess.idx>=sess.steps.length){ finish(); return; }
+  const nxt=sess.steps[sess.idx];
+  if(!nxt.isRest) runCd(()=>renderStep()); else renderStep();
 }
-
 function togglePause(){
-  if(!session) return;
-  session.paused=!session.paused;
-  const isPaused=session.paused;
-  document.getElementById('play-btn').textContent=isPaused?'▶':'⏸';
-  document.getElementById('sess-pause-nav').textContent=isPaused?'▶':'⏸';
-  if(!isPaused){
-    const step=session.steps[session.stepIdx];
-    if(!step.isRest && !step.repBased) startCountdown();
-    else if(step.isRest) startCountdown();
+  if(!sess) return;
+  sess.paused=!sess.paused;
+  $('play-btn').textContent=sess.paused?'▶':'⏸';
+  $('pause-nav').textContent=sess.paused?'▶':'⏸';
+  if(!sess.paused&&!sess.inCd){
+    const step=sess.steps[sess.idx];
+    if(!step.repBased) startTick();
   }
 }
-
-function confirmStop(){
-  document.getElementById('stop-dialog').classList.add('open');
-}
-function closeDialog(){
-  document.getElementById('stop-dialog').classList.remove('open');
-}
-function stopSession(){
-  closeDialog();
-  clearInterval(session?.timerInterval);
-  session=null;
-  showScreen('s-home');
-}
-
-function finishSession(){
-  clearInterval(session.timerInterval);
-  const elapsed=Math.round((Date.now()-sessionStartTime)/60000);
-  const r=session.routine;
-  document.getElementById('done-sub').textContent=r.name;
-  document.getElementById('stat-ex').textContent=r.exercises.length;
-  document.getElementById('stat-min').textContent=Math.max(1,elapsed);
-  document.getElementById('stat-sets').textContent=session.doneSets;
+function confirmStop(){ $('stop-dialog').classList.add('open'); }
+function closeDialog(){ $('stop-dialog').classList.remove('open'); }
+function doStop(){ closeDialog(); _clearSess(); showScreen('s-home'); }
+function finish(){
+  const el=Math.max(1,Math.round((Date.now()-sessStart)/60000));
+  const r=sess.routine;
+  $('done-sub').textContent=r.name;
+  $('stat-ex').textContent=r.exercises.length;
+  $('stat-min').textContent=el;
+  $('stat-sets').textContent=sess.doneSets;
   speak('Routine complete. Great work!');
-  beepDone(); setTimeout(beepDone,300);
-  showScreen('s-done');
+  beepDone(); setTimeout(beepDone,350);
+  _clearSess(); showScreen('s-done');
 }
 
-// ── Init ──────────────────────────────────────────────────────────
+// ── Boot ──────────────────────────────────────────────────────────
 renderHome();
-
-// Unlock audio on first tap
-document.addEventListener('touchstart',()=>{ try{ getAudio(); }catch(e){} },{once:true,passive:true});
-document.addEventListener('click',()=>{ try{ getAudio(); }catch(e){} },{once:true});
-
-// Prevent sleep on active session (Screen Wake Lock API)
-let wakeLock=null;
-async function requestWakeLock(){
-  if('wakeLock' in navigator){
-    try{ wakeLock=await navigator.wakeLock.request('screen'); }catch(e){}
-  }
-}
-document.addEventListener('visibilitychange',async()=>{
-  if(document.visibilityState==='visible'&&session) await requestWakeLock();
-});
+['touchstart','click'].forEach(ev=>document.addEventListener(ev,()=>{ try{ getACtx(); }catch(e){} },{once:true,passive:true}));
+if('wakeLock' in navigator) document.addEventListener('visibilitychange',async()=>{ if(document.visibilityState==='visible'&&sess) try{ await navigator.wakeLock.request('screen'); }catch(e){} });
 </script>
 </body>
 </html>
